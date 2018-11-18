@@ -1,7 +1,13 @@
 .main {
+    font-family: 'Lato', sans-serif;;
     text-align: center;
+    background-color: lightseagreen;
+    padding: 30px;
 }
 
-.title {
-    color: green;
+.input-button {
+    font-size: 18px;
+    background-color: lightseagreen;
+    border: none;
+    color: white;
 }

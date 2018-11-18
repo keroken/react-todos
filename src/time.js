@@ -1,10 +1,10 @@
 import React from 'react';
+import style from './css/time.css';
 
 const Time = ({time}) => {
     return (
     <div>
-        <h2>Current Time</h2>
-        <span>time: {time.toLocaleTimeString()}</span>
+        <span className="time-block">time: {time.toLocaleTimeString()}</span>
     </div>
     );
 }

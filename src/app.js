@@ -1,6 +1,7 @@
 import React from 'react';
 import Todo from './todos';
 import Time from './time';
+import style from './css/app.css';
 
 class App extends React.Component {
     constructor() {
@@ -50,7 +51,6 @@ class App extends React.Component {
         }
     }
 
-
     componentDidMount() {
         let id = setInterval(this.tick, 1000)
         this.setState({intrevalId: id})
@@ -63,14 +63,16 @@ class App extends React.Component {
     render(){
         return (
             <div className="main">
-                <h1>New Task</h1>
+                <Time time={this.state.time}/>
+                <h1>Todos</h1>
                 <input type="text"
                     onChange={this.handleChange}
                     onKeyDown={this.keyPress}
                     value={this.state.input} />
-                <button onClick={this.addToDo}>Add</button>
-                <Time time={this.state.time}/>
-                <h2>ToDos:</h2>
+                <button className="input-button"
+                    onClick={this.addToDo}>
+                    <i className="fas fa-plus-circle"></i>
+                </button>
                 <Todo todos={this.state.todos} removeToDo={this.removeToDo} />
             </div>
         )

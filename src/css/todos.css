@@ -1,0 +1,7 @@
+.todo-list {
+    margin: 0 auto;
+    width: 200px;
+    text-align: left;
+    background-color: lightgreen;
+    border-radius: 10px;
+}
