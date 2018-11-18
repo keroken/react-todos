@@ -1,0 +1,71 @@
+import React from 'react';
+import ReactDOM  from 'react-dom';
+import Todo from './todos';
+import Time from './time';
+import styles from './css/app.css';
+
+class App extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            input: "",
+            todos: [],
+            time: new Date(),
+            intervalId: ""
+        }
+        this.addToDo = this.addToDo.bind(this)
+        this.removeToDo = this.removeToDo.bind(this)
+        this.tick = this.tick.bind(this)
+    }
+
+    addToDo() {
+        let {todos, input} = this.state
+        todos = todos.concat(input)
+        this.setState({
+            todos: todos,
+            input: ""
+        })
+        console.log(input, todos)
+    }
+
+    removeToDo(i) {
+        let {todos} = this.state
+        todos = todos.slice(0, i).concat(todos.slice(i+1))
+        this.setState({todos: todos, input: ""})
+    }
+
+    tick() {
+        let {time} = this.state
+        time.setSeconds(time.getSeconds()+1)
+        this.setState({time: time})
+    }
+
+    componentDidMount() {
+        let id = setInterval(this.tick, 1000)
+        this.setState({intrevalId: id})
+    }
+    
+    componentWillUnmount() {
+        clearInterval(this.state.intervalId)
+    }
+
+    render(){
+        return (
+            <div>
+                <h1>New Task</h1>
+                <input type="text" onChange={e =>
+                    this.setState({input: e.target.value})}
+                    value={this.state.input} />
+                <button onClick={this.addToDo}>Add</button>
+                <Time time={this.state.time}/>
+                <h2>ToDos:</h2>
+                <Todo todos={this.state.todos} removeToDo={this.removeToDo} />
+            </div>
+        )
+    }
+}
+
+ReactDOM.render(
+    <App />,
+    document.getElementById('app')
+)
