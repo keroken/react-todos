@@ -16,6 +16,8 @@ class App extends React.Component {
         this.addToDo = this.addToDo.bind(this)
         this.removeToDo = this.removeToDo.bind(this)
         this.tick = this.tick.bind(this)
+        this.handleChange = this.handleChange.bind(this)
+        this.keyPress = this.keyPress.bind(this)
     }
 
     addToDo() {
@@ -25,7 +27,6 @@ class App extends React.Component {
             todos: todos,
             input: ""
         })
-        console.log(input, todos)
     }
 
     removeToDo(i) {
@@ -40,6 +41,18 @@ class App extends React.Component {
         this.setState({time: time})
     }
 
+    handleChange(e) {
+        this.setState({input: e.target.value})
+    }
+
+    keyPress(e) {
+        if(e.keyCode == 13){
+            this.setState({input: e.target.value})
+            this.addToDo()
+        }
+    }
+
+
     componentDidMount() {
         let id = setInterval(this.tick, 1000)
         this.setState({intrevalId: id})
@@ -51,10 +64,11 @@ class App extends React.Component {
 
     render(){
         return (
-            <div>
+            <div className="main">
                 <h1>New Task</h1>
-                <input type="text" onChange={e =>
-                    this.setState({input: e.target.value})}
+                <input type="text"
+                    onChange={this.handleChange}
+                    onKeyDown={this.keyPress}
                     value={this.state.input} />
                 <button onClick={this.addToDo}>Add</button>
                 <Time time={this.state.time}/>
