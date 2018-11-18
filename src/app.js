@@ -1,8 +1,6 @@
 import React from 'react';
-import ReactDOM  from 'react-dom';
 import Todo from './todos';
 import Time from './time';
-import styles from './css/app.css';
 
 class App extends React.Component {
     constructor() {
@@ -79,7 +77,4 @@ class App extends React.Component {
     }
 }
 
-ReactDOM.render(
-    <App />,
-    document.getElementById('app')
-)
+export default App;
